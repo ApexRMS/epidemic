@@ -107,7 +107,7 @@ namespace SyncroSim.Epidemic
 
         public static void ThrowEpidemicException(string message, params object[] args)
         {
-            throw new Exception(string.Format(CultureInfo.InvariantCulture, message, args));
+            throw new EpidemicException(string.Format(CultureInfo.InvariantCulture, message, args));
         }
 
         public static bool GetNullableBool(DataRow dr, string columnName)
