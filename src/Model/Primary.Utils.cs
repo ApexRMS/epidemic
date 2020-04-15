@@ -151,33 +151,31 @@ namespace SyncroSim.Epidemic
             return new DateTime(Start.Year, Start.Month, Start.Day, 0, 0, 0);
         }
 
-        private int? TimestepFromDateTime(DataRow dr, DateTime runControlStartDate, string source)
+        private bool TimestepFromDateTime(DataRow dr, DateTime startDate, out int? timestep)
         {
             if (dr[Shared.TIMESTEP_COLUMN_NAME] == DBNull.Value)
             {
-                return null;
+                timestep = null;
+                return true;
             }
-            else
+
+            DateTime d = (DateTime)dr[Shared.TIMESTEP_COLUMN_NAME];
+            d = new DateTime(d.Year, d.Month, d.Day, 0, 0, 0);
+            int v = (d - startDate).Days + 1;
+
+            if (v < this.MinimumTimestep)
             {
-                DateTime d = (DateTime)dr[Shared.TIMESTEP_COLUMN_NAME];
-                d = new DateTime(d.Year, d.Month, d.Day, 0, 0, 0);
-                int v = (d - runControlStartDate).Days + 1;
-
-                if (v < this.MinimumTimestep)
-                {
-                    Shared.ThrowEpidemicException(
-                        "{0}: The date '{1}' is less than the minimum date in run control.",
-                        source, d.ToString("yyyy-MM-dd"));
-                }
-                else if (v > this.MaximumTimestep)
-                {
-                    Shared.ThrowEpidemicException(
-                        "{0}: The date '{1}' is greater than the maximum date in run control.",
-                        source, d.ToString("yyyy-MM-dd"));
-                }
-
-                return v;
+                timestep = null;
+                return false;
             }
+            else if (v > this.MaximumTimestep)
+            {
+                timestep = null;
+                return false;
+            }
+
+            timestep = v;
+            return true;
         }
 
         private DateTime DateTimeFromTimestep(int timestep, DateTime dts, DateTime dte)

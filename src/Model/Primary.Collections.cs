@@ -70,15 +70,22 @@ namespace SyncroSim.Epidemic
             }
         }
 
-        private void FillActualDeathCollection(DateTime startingDateTime)
+        private void FillActualDeathCollection(DateTime startDate)
         {
             Debug.Assert(this.m_ActualDeaths.Count == 0);
             DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_ACTUAL_DEATH_NAME);
 
             foreach (DataRow dr in ds.GetData().Rows)
             {
+                int? timestep = null;
+
+                if (!TimestepFromDateTime(dr, startDate, out timestep))
+                {
+                    continue;
+                }
+
                 ActualDeath Item = new ActualDeath(
-                    this.TimestepFromDateTime(dr, startingDateTime, ds.DisplayName).Value,
+                    timestep.Value,
                     Convert.ToInt32(dr[Shared.JURISDICTION_COLUMN_NAME]),
                     Convert.ToDouble(dr[Shared.VALUE_COLUMN_NAME]));
 
@@ -86,13 +93,20 @@ namespace SyncroSim.Epidemic
             }
         }
 
-        private void FillGrowthRateCollection(DateTime startingDateTime)
+        private void FillGrowthRateCollection(DateTime startDate)
         {
             Debug.Assert(this.m_GrowthRates.Count == 0);
             DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_GROWTH_RATE_NAME);
 
             foreach (DataRow dr in ds.GetData().Rows)
             {
+                int? timestep = null;
+
+                if (!TimestepFromDateTime(dr, startDate, out timestep))
+                {
+                    continue;
+                }
+
                 DistributionFrequency? df = null;
 
                 if (dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME] != DBNull.Value)
@@ -102,7 +116,7 @@ namespace SyncroSim.Epidemic
 
                 GrowthRate Item = new GrowthRate(
                     Shared.GetNullableInt(dr, Shared.ITERATION_COLUMN_NAME),
-                    this.TimestepFromDateTime(dr, startingDateTime, ds.DisplayName),
+                    timestep,
                     Shared.GetNullableInt(dr, Shared.JURISDICTION_COLUMN_NAME),
                     Shared.GetNullableDouble(dr, Shared.VALUE_COLUMN_NAME),
                     Shared.GetNullableInt(dr, Shared.DISTRIBUTION_TYPE_COLUMN_NAME),
@@ -129,13 +143,20 @@ namespace SyncroSim.Epidemic
             }
         }
 
-        private void FillFatalityRateCollection(DateTime startingDateTime)
+        private void FillFatalityRateCollection(DateTime startDate)
         {
             Debug.Assert(this.m_FatalityRates.Count == 0);
             DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_FATALITY_RATE_NAME);
 
             foreach (DataRow dr in ds.GetData().Rows)
             {
+                int? timestep = null;
+
+                if (!TimestepFromDateTime(dr, startDate, out timestep))
+                {
+                    continue;
+                }
+
                 DistributionFrequency? df = null;
 
                 if (dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME] != DBNull.Value)
@@ -145,7 +166,7 @@ namespace SyncroSim.Epidemic
 
                 FatalityRate Item = new FatalityRate(
                     Shared.GetNullableInt(dr, Shared.ITERATION_COLUMN_NAME),
-                    this.TimestepFromDateTime(dr, startingDateTime, ds.DisplayName),
+                    timestep,
                     Shared.GetNullableInt(dr, Shared.JURISDICTION_COLUMN_NAME),
                     Shared.GetNullableDouble(dr, Shared.VALUE_COLUMN_NAME),
                     Shared.GetNullableInt(dr, Shared.DISTRIBUTION_TYPE_COLUMN_NAME),
@@ -172,13 +193,20 @@ namespace SyncroSim.Epidemic
             }
         }
 
-        private void FillAttackRateCollection(DateTime startingDateTime)
+        private void FillAttackRateCollection(DateTime startDate)
         {
             Debug.Assert(this.m_AttackRates.Count == 0);
             DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_ATTACK_RATE_NAME);
 
             foreach (DataRow dr in ds.GetData().Rows)
             {
+                int? timestep = null;
+
+                if (!TimestepFromDateTime(dr, startDate, out timestep))
+                {
+                    continue;
+                }
+
                 DistributionFrequency? df = null;
 
                 if (dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME] != DBNull.Value)
@@ -195,7 +223,7 @@ namespace SyncroSim.Epidemic
 
                 AttackRate Item = new AttackRate(
                     Shared.GetNullableInt(dr, Shared.ITERATION_COLUMN_NAME),
-                    this.TimestepFromDateTime(dr, startingDateTime, ds.DisplayName),
+                    timestep,
                     Shared.GetNullableInt(dr, Shared.JURISDICTION_COLUMN_NAME),
                     Value,
                     Shared.GetNullableInt(dr, Shared.DISTRIBUTION_TYPE_COLUMN_NAME),
@@ -222,27 +250,41 @@ namespace SyncroSim.Epidemic
             }
         }
 
-        private void FillModelTypeCollection(DateTime startingDateTime)
+        private void FillModelTypeCollection(DateTime startDate)
         {
             Debug.Assert(this.m_ModelTypes.Count == 0);
             DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_MODEL_TYPE_NAME);
 
             foreach (DataRow dr in ds.GetData().Rows)
             {
+                int? timestep = null;
+
+                if (!TimestepFromDateTime(dr, startDate, out timestep))
+                {
+                    continue;
+                }
+
                 this.m_ModelTypes.Add(new ModelType(
-                    this.TimestepFromDateTime(dr, startingDateTime, ds.DisplayName),
+                    timestep,
                     Shared.GetNullableInt(dr, Shared.JURISDICTION_COLUMN_NAME),
                     (EpidemicModelType)(long)dr[Shared.DATASHEET_MODEL_TYPE_COLUMN_NAME]));
             }
         }
 
-        private void FillIncubationPeriodCollection(DateTime startingDateTime)
+        private void FillIncubationPeriodCollection(DateTime startDate)
         {
             Debug.Assert(this.m_IncubationPeriods.Count == 0);
             DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_INCUBATION_PERIOD_NAME);
 
             foreach (DataRow dr in ds.GetData().Rows)
             {
+                int? timestep = null;
+
+                if (!TimestepFromDateTime(dr, startDate, out timestep))
+                {
+                    continue;
+                }
+
                 DistributionFrequency? df = null;
 
                 if (dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME] != DBNull.Value)
@@ -252,7 +294,7 @@ namespace SyncroSim.Epidemic
 
                 IncubationPeriod Item = new IncubationPeriod(
                     Shared.GetNullableInt(dr, Shared.ITERATION_COLUMN_NAME),
-                    this.TimestepFromDateTime(dr, startingDateTime, ds.DisplayName),
+                    timestep,
                     Shared.GetNullableInt(dr, Shared.JURISDICTION_COLUMN_NAME),
                     Shared.GetNullableDouble(dr, Shared.VALUE_COLUMN_NAME),
                     Shared.GetNullableInt(dr, Shared.DISTRIBUTION_TYPE_COLUMN_NAME),
@@ -279,13 +321,20 @@ namespace SyncroSim.Epidemic
             }
         }
 
-        private void FillSymptomPeriodCollection(DateTime startingDateTime)
+        private void FillSymptomPeriodCollection(DateTime startDate)
         {
             Debug.Assert(this.m_SymptomPeriods.Count == 0);
             DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_SYMPTOM_PERIOD_NAME);
 
             foreach (DataRow dr in ds.GetData().Rows)
             {
+                int? timestep = null;
+
+                if (!TimestepFromDateTime(dr, startDate, out timestep))
+                {
+                    continue;
+                }
+
                 DistributionFrequency? df = null;
 
                 if (dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME] != DBNull.Value)
@@ -295,7 +344,7 @@ namespace SyncroSim.Epidemic
 
                 SymptomPeriod Item = new SymptomPeriod(
                     Shared.GetNullableInt(dr, Shared.ITERATION_COLUMN_NAME),
-                    this.TimestepFromDateTime(dr, startingDateTime, ds.DisplayName),
+                    timestep,
                     Shared.GetNullableInt(dr, Shared.JURISDICTION_COLUMN_NAME),
                     Shared.GetNullableDouble(dr, Shared.VALUE_COLUMN_NAME),
                     Shared.GetNullableInt(dr, Shared.DISTRIBUTION_TYPE_COLUMN_NAME),
