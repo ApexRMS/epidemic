@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package name="epidemic" displayName="Model of epidemic infections and deaths" version="1.0.0" url="https://github.com/ApexRMS/epidemic">
+  <transformers>
+    <transformer name="Primary" displayName="Epidemic" className="SyncroSim.Epidemic.Primary" classAssembly="SyncroSim.Epidemic" configurationSheet="RunControl" isPrimary="True">
+      <include>
+        <transformer name="corestime_Runtime"/>
+      </include>
+      <datafeeds>
+        <datafeed name="Jurisdiction" displayName="Jurisdiction" dataScope="Project">
+          <datasheets>
+            <datasheet name="Jurisdiction" displayName="Jurisdiction" valueMember="JurisdictionID" displayMember="Name">
+              <columns>
+                <column name="JurisdictionID" dataType="Integer" isPrimary="True"/>
+                <column name="ProjectID" dataType="Integer"/>
+                <column name="Name" dataType="String"/>
+                <column name="Description" dataType="String"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="Terminology" dataScope="Project">
+          <datasheets>
+            <datasheet name="Terminology" isSingleRow="True">
+              <columns>
+                <column name="TerminologyID" dataType="Integer" isPrimary="True"/>
+                <column name="ProjectID" dataType="Integer"/>
+                <column name="JurisdictionLabel" dataType="String" displayName="Jurisdiction Label"/>
+              </columns>
+              <defaultRecords>
+                <record columns="JurisdictionLabel" values="Jurisdiction"/>
+              </defaultRecords>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="RunControl" displayName="Run Control" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="RunControl" displayName="Run Control" isSingleRow="True">
+              <columns>
+                <column name="RunControlID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="MinimumTimestep" displayName="Start Date" dataType="Integer" defaultValue="0" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="0" format="d"/>
+                <column name="MaximumTimestep" displayName="End Date" dataType="Integer" defaultValue="0" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="0" format="d"/>
+                <column name="MinimumIteration" displayName="Minimum Iteration" dataType="Integer" defaultValue="1" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="1" format="d"/>
+                <column name="MaximumIteration" displayName="Number of Iterations" dataType="Integer" defaultValue="1" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="1" format="d"/>
+                <column name="ModelHistoricalDeaths" displayName="Model Historical Deaths (Y/N)" dataType="Boolean"/>
+                <column name="StartDate" displayName="Start Date" dataType="Date"/>
+                <column name="EndDate" displayName="End Date" dataType="Date"/>                
+              </columns>
+            </datasheet>
+            <datasheet name="RuntimeJurisdiction" displayName="Runtime Jurisdiction">
+              <columns>
+                <column name="RuntimeJurisdictionID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" allowDbNull="False"/>
+              </columns>
+              <validations>
+                <validation validationType="Unique" columns="Jurisdiction"/>
+              </validations>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="Population" displayName="Population" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="Population" displayName="Population">
+              <columns>
+                <column name="PopulationID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Iteration" dataType="Integer" validationType="WholeNumber" validationCondition="Greater" formula1="0" format="d" isOptional="True"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" allowDbNull="False" />
+                <column name="TotalSize" displayName="Population" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0" format="N0" allowDbNull="False" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="ActualDeath" displayName="Deaths" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="ActualDeath" displayName="Deaths">
+              <columns>
+                <column name="ActualDeathID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Timestep" displayName="Date" dataType="Date" validationType="Date" allowDbNull="False"/>               
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" allowDbNull="False"/>
+                <column name="Value" displayName="Daily Deaths" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0" format="N4" allowDbNull="False"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="GrowthRate" displayName="Growth Rate" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="GrowthRate" displayName="Growth Rate">
+              <columns>
+                <column name="GrowthRateID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Iteration" dataType="Integer" validationType="WholeNumber" validationCondition="Greater" formula1="0" format="d" isOptional="True"/>
+                <column name="Timestep" displayName="Date" dataType="Date" validationType="Date" isOptional="True"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" isOptional="True"/>
+                <column name="Value" displayName="Proportion" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0" format="N4"/>
+                <column name="DistributionType" displayName="Distribution" dataType="Integer" validationType="Datasheet" formula1="corestime_DistributionType" isOptional="True"/>
+                <column name="DistributionFrequencyID" displayName="Sampling Frequency" dataType="Integer" validationType="List" formula1="0:Always|1:Iteration Only|2:Iteration and Timestep" isOptional="True"/>
+                <column name="DistributionSD" displayName="SD" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMin" displayName="Min" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMax" displayName="Max" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+              </columns>
+              <validations>
+                <validation validationType="LessEqual" columns="DistributionMin|DistributionMax"/>
+              </validations>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="FatalityRate" displayName="Fatality Rate" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="FatalityRate" displayName="Fatality Rate">
+              <columns>
+                <column name="FatalityRateID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Iteration" dataType="Integer" validationType="WholeNumber" validationCondition="Greater" formula1="0" format="d" isOptional="True"/>
+                <column name="Timestep" displayName="Date" dataType="Date" validationType="Date" isOptional="True"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" isOptional="True"/>
+                <column name="Value" displayName="Proportion" dataType="Double" validationType="Decimal" validationCondition="Between" formula1="0.0" formula2="1.0" format="N4"/>
+                <column name="DistributionType" displayName="Distribution" dataType="Integer" validationType="Datasheet" formula1="corestime_DistributionType" isOptional="True"/>
+                <column name="DistributionFrequencyID" displayName="Sampling Frequency" dataType="Integer" validationType="List" formula1="0:Always|1:Iteration Only|2:Iteration and Timestep" isOptional="True"/>
+                <column name="DistributionSD" displayName="SD" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMin" displayName="Min" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMax" displayName="Max" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+              </columns>
+              <validations>
+                <validation validationType="LessEqual" columns="DistributionMin|DistributionMax"/>
+              </validations>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="AttackRate" displayName="Attack Rate" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="AttackRate" displayName="Attack Rate">
+              <columns>
+                <column name="AttackRateID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Iteration" dataType="Integer" validationType="WholeNumber" validationCondition="Greater" formula1="0" format="d" isOptional="True"/>
+                <column name="Timestep" displayName="Date" dataType="Date" validationType="Date" isOptional="True"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" isOptional="True"/>
+                <column name="Value" displayName="Attack Rate (Proportion)" dataType="Double" validationType="Decimal" validationCondition="Between" formula1="0.0" formula2="1.0"/>
+                <column name="DistributionType" displayName="Distribution" dataType="Integer" validationType="Datasheet" formula1="corestime_DistributionType" isOptional="True"/>
+                <column name="DistributionFrequencyID" displayName="Sampling Frequency" dataType="Integer" validationType="List" formula1="0:Always|1:Iteration Only|2:Iteration and Timestep" isOptional="True"/>
+                <column name="DistributionSD" displayName="SD" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMin" displayName="Min" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMax" displayName="Max" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+              </columns>
+              <validations>
+                <validation validationType="LessEqual" columns="DistributionMin|DistributionMax"/>
+              </validations>
+            </datasheet>
+          </datasheets>
+        </datafeed>   
+        <datafeed name="IncubationPeriod" displayName="Incubation Period" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="IncubationPeriod" displayName="Incubation Period">
+              <columns>
+                <column name="IncubationPeriodID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Iteration" dataType="Integer" validationType="WholeNumber" validationCondition="Greater" formula1="0" format="d" isOptional="True"/>
+                <column name="Timestep" displayName="Date" dataType="Date" validationType="Date" isOptional="True"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" isOptional="True"/>
+                <column name="Value" displayName="Days" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0" format="N4"/>
+                <column name="DistributionType" displayName="Distribution" dataType="Integer" validationType="Datasheet" formula1="corestime_DistributionType" isOptional="True"/>
+                <column name="DistributionFrequencyID" displayName="Sampling Frequency" dataType="Integer" validationType="List" formula1="0:Always|1:Iteration Only|2:Iteration and Timestep" isOptional="True"/>
+                <column name="DistributionSD" displayName="SD" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMin" displayName="Min" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMax" displayName="Max" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+              </columns>
+              <validations>
+                <validation validationType="LessEqual" columns="DistributionMin|DistributionMax"/>
+              </validations>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="SymptomPeriod" displayName="Symptom Period" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="SymptomPeriod" displayName="Symptom Period">
+              <columns>
+                <column name="SymptomPeriodID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Iteration" dataType="Integer" validationType="WholeNumber" validationCondition="Greater" formula1="0" format="d" isOptional="True"/>
+                <column name="Timestep" displayName="Date" dataType="Date" validationType="Date" isOptional="True"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" isOptional="True"/>
+                <column name="Value" displayName="Days" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0" format="N4"/>
+                <column name="DistributionType" displayName="Distribution" dataType="Integer" validationType="Datasheet" formula1="corestime_DistributionType" isOptional="True"/>
+                <column name="DistributionFrequencyID" displayName="Sampling Frequency" dataType="Integer" validationType="List" formula1="0:Always|1:Iteration Only|2:Iteration and Timestep" isOptional="True"/>
+                <column name="DistributionSD" displayName="SD" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMin" displayName="Min" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="DistributionMax" displayName="Max" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+              </columns>
+              <validations>
+                <validation validationType="LessEqual" columns="DistributionMin|DistributionMax"/>
+              </validations>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="ModelType" displayName="Model Type" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="ModelType" displayName="Model Type">
+              <columns>
+                <column name="ModelTypeID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer"/>
+                <column name="Timestep" displayName="Date" dataType="Date" validationType="Date" isOptional="True"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" isOptional="True"/>
+                <column name="ModelType" displayName="Model Type" dataType="Integer" validationType="List" formula1="0:Exponential|1:Logistic"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="DistributionValue" displayName="Distributions" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="DistributionValue" displayName="Distributions">
+              <columns>
+                <column name="DistributionValueID" dataType="Integer" isPrimary="True"/>
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" validationType="WholeNumber" validationCondition="Greater" formula1="0" format="d" isOptional="True"/>
+                <column name="Timestep" displayName="Date" dataType="Date" validationType="Date" isOptional="True"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" isOptional="True"/>
+                <column name="DistributionTypeID" dataType="Integer" displayName="Distribution" validationType="Datasheet" formula1="corestime_DistributionType" allowDbNull="False"/>
+                <column name="ExternalVariableTypeID" dataType="Integer" displayName="External Variable" validationType="Datasheet" formula1="corestime_ExternalVariableType" isOptional="True"/>
+                <column name="ExternalVariableMin" displayName="External Variable Min" dataType="Double" format="0.0000" validationType="Decimal" isOptional="True"/>
+                <column name="ExternalVariableMax" displayName="External Variable Max" dataType="Double" format="0.0000" validationType="Decimal" isOptional="True"/>
+                <column name="Value" dataType="Double" displayName="Value" validationType="Decimal"/>
+                <column name="ValueDistributionTypeID" dataType="Integer" displayName="Value Distribution" validationType="Datasheet" formula1="corestime_DistributionType" isOptional="True"/>
+                <column name="ValueDistributionFrequency" displayName="Sampling Frequency" dataType="Integer" validationType="List" formula1="0:Always|1:Iteration Only|2:Iteration and Timestep" isOptional="True"/>
+                <column name="ValueDistributionSD" displayName="Value SD" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="ValueDistributionMin" displayName="Value Min" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="ValueDistributionMax" displayName="Value Max" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0.0" isOptional="True"/>
+                <column name="ValueDistributionRelativeFrequency" dataType="Double" displayName="Relative Frequency" validationType="Decimal" validationCondition="Greater" formula1="0.0" isOptional="True"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="OutputGrowthRate" displayName="Output Growth Rate" dataScope="Scenario" isOutput="True">
+          <datasheets>
+            <datasheet name="OutputGrowthRate" displayName="Output Growth Rate">
+              <columns>
+                <column name="ScenarioID" displayName="Scenario" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Timestep" dataType="Integer" displayName="Date" isCompositeIndex="True"/>
+                <column name="Date" displayName="Date" dataType="Date" validationType="Date"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" allowDbNull="False"/>
+                <column name="Value" dataType="Double"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>           
+        <datafeed name="OutputFatalityRate" displayName="Output Fatality Rate" dataScope="Scenario" isOutput="True">
+          <datasheets>
+            <datasheet name="OutputFatalityRate" displayName="Output Fatality Rate">
+              <columns>
+                <column name="ScenarioID" displayName="Scenario" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Timestep" dataType="Integer" displayName="Date" isCompositeIndex="True"/>
+                <column name="Date" displayName="Date" dataType="Date" validationType="Date"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" allowDbNull="False"/>
+                <column name="Value" dataType="Double"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="OutputAttackRate" displayName="Output Attack Rate" dataScope="Scenario" isOutput="True">
+          <datasheets>
+            <datasheet name="OutputAttackRate" displayName="Output Attack Rate">
+              <columns>
+                <column name="ScenarioID" displayName="Scenario" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Timestep" dataType="Integer" displayName="Date" isCompositeIndex="True"/>
+                <column name="Date" displayName="Date" dataType="Date" validationType="Date"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" allowDbNull="False"/>
+                <column name="Value" dataType="Double"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="OutputIncubationPeriod" displayName="Output Incubation Period" dataScope="Scenario" isOutput="True">
+          <datasheets>
+            <datasheet name="OutputIncubationPeriod" displayName="Output Incubation Period">
+              <columns>
+                <column name="ScenarioID" displayName="Scenario" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Timestep" dataType="Integer" displayName="Date" isCompositeIndex="True"/>
+                <column name="Date" displayName="Date" dataType="Date" validationType="Date"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" allowDbNull="False"/>
+                <column name="Value" dataType="Double"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="OutputSymptomPeriod" displayName="Output Symptom Period" dataScope="Scenario" isOutput="True">
+          <datasheets>
+            <datasheet name="OutputSymptomPeriod" displayName="Output Symptom Period">
+              <columns>
+                <column name="ScenarioID" displayName="Scenario" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Timestep" dataType="Integer" displayName="Date" isCompositeIndex="True"/>
+                <column name="Date" displayName="Date" dataType="Date" validationType="Date"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" allowDbNull="False"/>
+                <column name="Value" dataType="Double"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="OutputInfectedPeriod" displayName="Output Infected Period" dataScope="Scenario" isOutput="True">
+          <datasheets>
+            <datasheet name="OutputInfectedPeriod" displayName="Output Infected Period">
+              <columns>
+                <column name="ScenarioID" displayName="Scenario" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Timestep" dataType="Integer" displayName="Date" isCompositeIndex="True"/>
+                <column name="Date" displayName="Date" dataType="Date" validationType="Date"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" allowDbNull="False"/>
+                <column name="Value" dataType="Double"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="OutputInfected" displayName="Output Infected" dataScope="Scenario" isOutput="True">
+          <datasheets>
+            <datasheet name="OutputInfected" displayName="Output Infected">
+              <columns>
+                <column name="ScenarioID" displayName="Scenario" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Timestep" dataType="Integer" displayName="Date" isCompositeIndex="True"/>
+                <column name="Date" displayName="Date" dataType="Date" validationType="Date"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" allowDbNull="False"/>
+                <column name="Value" dataType="Double"/>
+                <column name="CumulativeValue" dataType="Double"/>
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="OutputDeath" displayName="Output Death" dataScope="Scenario" isOutput="True">
+          <datasheets>
+            <datasheet name="OutputDeath" displayName="Output Death">
+              <columns>
+                <column name="ScenarioID" displayName="Scenario" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Iteration" dataType="Integer" isCompositeIndex="True"/>
+                <column name="Timestep" dataType="Integer" displayName="Date" isCompositeIndex="True"/>
+                <column name="Date" displayName="Date" dataType="Date" validationType="Date"/>
+                <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" allowDbNull="False"/>
+                <column name="Value" dataType="Double"/>
+                <column name="CumulativeValue" dataType="Double"/>                
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+      </datafeeds>
+    </transformer>
+  </transformers>
+  <layouts>
+    <layout name="coreforms_LibraryDatafeeds">
+      <item name="core_SysFolder"/>
+      <item name="core_Backup"/>
+      <item name="core_Multiprocessing"/>
+      <item name="core_Options"/>
+    </layout>
+    <layout name="coreforms_ProjectDatafeeds">
+      <item name="Jurisdiction"/> 
+      <item name="Terminology"/>       
+    </layout>
+    <layout name="coreforms_ScenarioDatafeeds">
+      <item name="RunControl"/>
+      <item name="Population"/>       
+      <item name="ActualDeath"/>
+      <item name="GrowthRate"/>
+      <item name="FatalityRate"/>     
+      <group name="Advanced" displayName="Advanced">
+        <item name="AttackRate"/>
+        <item name="IncubationPeriod"/>
+        <item name="SymptomPeriod"/>
+        <item name="ModelType"/>           
+      </group>
+    </layout>
+    <layout name="coreforms_ResultTransformers">
+      <item name="corestime_ChartTransformer"/>
+    </layout>
+    <layout name="corestimeforms_Charts" configurationSheet="RunControl" minDateTimeColumn="StartDate" maxDateTimeColumn="EndDate" xAxisValueType="DateTime" xAxisIntervalType="Days" xAxisLabelFormat="MMM-dd">
+      <group name="Infections" displayName="Infections" dataSheet="OutputInfected" filter="Jurisdiction">
+        <item name="Infected" displayName="Daily" dataSheet="OutputInfected" column="Value" customTitle="Daily Infected"/>
+        <item name="InfectedCumulative" displayName="Cumulative" dataSheet="OutputInfected" column="CumulativeValue" customTitle="Cumulative Infected"/>
+      </group>
+      <group name="Deaths" displayName="Deaths" dataSheet="OutputDeath" filter="Jurisdiction">
+        <item name="Deaths" displayName="Daily" dataSheet="OutputDeath" column="Value" customTitle="Daily Deaths"/>
+        <item name="DeathsCumulative" displayName="Cumulative" dataSheet="OutputDeath" column="CumulativeValue" customTitle="Cumulative Deaths"/>
+      </group>  
+    </layout>
+  </layouts>
+  <views>
+    <view name="RunControlDataFeedView" target="RunControl" className="SyncroSim.Epidemic.RunControlDataFeedView" classAssembly="SyncroSim.Epidemic"/>    
+    <view name="DistributionValueDataFeedView" target="DistributionValue" className="SyncroSim.Epidemic.DistributionValueDataFeedView" classAssembly="SyncroSim.Epidemic"/>
+  </views>
+</package>
