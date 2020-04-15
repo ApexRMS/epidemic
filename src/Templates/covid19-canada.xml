@@ -2,6 +2,6 @@
 <template
   name="covid19-canada"
   displayName="COVID-19 Canada"
-  location="placeholder"
+  location="http://modelthecurve.ca/download-covid19-template"
   liveUpdate="True">
 </template>
