@@ -9,6 +9,12 @@ namespace SyncroSim.Epidemic
     {
         private bool m_ModelHistoricalDeaths;
 
+        public override void Configure()
+        {
+            base.Configure();
+            this.ConfigureRunControl();
+        }
+
         public override void Initialize()
         {
             base.Initialize();

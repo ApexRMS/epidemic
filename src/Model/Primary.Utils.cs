@@ -77,7 +77,7 @@ namespace SyncroSim.Epidemic
                 InfectedPeriod);
         }
 
-        private void InitializeRunControl()
+        private void ConfigureRunControl()
         {
             DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_RUN_CONTROL_NAME);
             DataRow dr = ds.GetDataRow();
@@ -119,10 +119,21 @@ namespace SyncroSim.Epidemic
                 Shared.ThrowEpidemicException("The run control start date cannot be greater than the end date.");
             }
 
-            //Timesteps
             dr[Shared.DATASHEET_RUN_CONTROL_MIN_TIMESTEP_COLUMN_NAME] = 1;
             dr[Shared.DATASHEET_RUN_CONTROL_MAX_TIMESTEP_COLUMN_NAME] = TotalDays;
+        }
 
+        private void InitializeRunControl()
+        {
+            DataRow dr = this.ResultScenario.GetDataSheet(Shared.DATASHEET_RUN_CONTROL_NAME).GetDataRow();
+            DateTime Start = (DateTime)dr[Shared.DATASHEET_RUN_CONTROL_START_DATE_COLUMN_NAME];
+            DateTime End = (DateTime)dr[Shared.DATASHEET_RUN_CONTROL_END_DATE_COLUMN_NAME];
+
+            Start = new DateTime(Start.Year, Start.Month, Start.Day, 0, 0, 0);
+            End = new DateTime(End.Year, End.Month, End.Day, 0, 0, 0);
+            int TotalDays = (End - Start).Days + 1;
+
+            //Timesteps
             this.MinimumTimestep = 1;
             this.MaximumTimestep = TotalDays;
 
