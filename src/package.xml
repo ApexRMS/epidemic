@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<package name="epidemic" displayName="Model of epidemic infections and deaths" version="1.0.0" url="https://github.com/ApexRMS/epidemic">
+<package name="epidemic" displayName="Model of epidemic infections and deaths" version="1.0.1" url="https://github.com/ApexRMS/epidemic">
   <transformers>
     <transformer name="Primary" displayName="Epidemic" className="SyncroSim.Epidemic.Primary" classAssembly="SyncroSim.Epidemic" configurationSheet="RunControl" isPrimary="True">
       <include>
