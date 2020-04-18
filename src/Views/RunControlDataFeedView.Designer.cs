@@ -41,7 +41,7 @@
             // DateTimeStart
             // 
             this.DateTimeStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DateTimeStart.Location = new System.Drawing.Point(139, 19);
+            this.DateTimeStart.Location = new System.Drawing.Point(110, 21);
             this.DateTimeStart.Name = "DateTimeStart";
             this.DateTimeStart.Size = new System.Drawing.Size(116, 22);
             this.DateTimeStart.TabIndex = 1;
@@ -50,7 +50,7 @@
             // DateTimeEnd
             // 
             this.DateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DateTimeEnd.Location = new System.Drawing.Point(139, 52);
+            this.DateTimeEnd.Location = new System.Drawing.Point(110, 53);
             this.DateTimeEnd.Name = "DateTimeEnd";
             this.DateTimeEnd.Size = new System.Drawing.Size(116, 22);
             this.DateTimeEnd.TabIndex = 3;
@@ -68,7 +68,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 54);
+            this.label2.Location = new System.Drawing.Point(14, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 2;
@@ -77,15 +77,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 87);
+            this.label3.Location = new System.Drawing.Point(14, 85);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 17);
+            this.label3.Size = new System.Drawing.Size(89, 17);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Total realizations:";
+            this.label3.Text = "Realizations:";
             // 
             // TextBoxMaxIterations
             // 
-            this.TextBoxMaxIterations.Location = new System.Drawing.Point(139, 85);
+            this.TextBoxMaxIterations.Location = new System.Drawing.Point(110, 85);
             this.TextBoxMaxIterations.Name = "TextBoxMaxIterations";
             this.TextBoxMaxIterations.Size = new System.Drawing.Size(116, 22);
             this.TextBoxMaxIterations.TabIndex = 5;
@@ -96,20 +96,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PanelJurisdictions.BorderColor = System.Drawing.Color.Gray;
-            this.PanelJurisdictions.Location = new System.Drawing.Point(139, 118);
+            this.PanelJurisdictions.Location = new System.Drawing.Point(110, 117);
             this.PanelJurisdictions.Name = "PanelJurisdictions";
             this.PanelJurisdictions.PaintBottomBorder = true;
             this.PanelJurisdictions.PaintLeftBorder = true;
             this.PanelJurisdictions.PaintRightBorder = true;
             this.PanelJurisdictions.PaintTopBorder = true;
             this.PanelJurisdictions.ShowBorder = true;
-            this.PanelJurisdictions.Size = new System.Drawing.Size(655, 350);
+            this.PanelJurisdictions.Size = new System.Drawing.Size(699, 365);
             this.PanelJurisdictions.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 120);
+            this.label4.Location = new System.Drawing.Point(14, 117);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 17);
             this.label4.TabIndex = 6;
