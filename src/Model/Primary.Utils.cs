@@ -41,19 +41,19 @@ namespace SyncroSim.Epidemic
             return Jurisdictions;
         }
 
-        private double GetMaxInfections(ModelState modelState)
+        private Population GetPopulation(int jurisdictionId)
         {
-            Population Pop = this.m_PopulationMap.GetPopulation(modelState.JurisdictionId, modelState.Iteration);
+            Population Pop = this.m_PopulationMap.GetPopulation(jurisdictionId);
 
             if (Pop == null)
             {
                 DataSheet ds = this.Project.GetDataSheet(Shared.DATASHEET_JURISDICTION_NAME);
 
-                Shared.ThrowEpidemicException("No population data defined for jurisdiction '{0}', iteration '{1}'.",
-                    ds.ValidationTable.GetDisplayName(modelState.JurisdictionId), modelState.Iteration);
+                Shared.ThrowEpidemicException("No population data defined for jurisdiction '{0}'.",
+                    ds.ValidationTable.GetDisplayName(jurisdictionId));
             }
 
-            return Pop.TotalSize * modelState.AttackRate;
+            return Pop;
         }
 
         private ModelState CreateTimestepModelState(int jurisdictionId, int iteration, int timestep)

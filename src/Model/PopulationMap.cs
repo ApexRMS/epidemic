@@ -3,11 +3,14 @@
 
 using System;
 using SyncroSim.Core;
+using SyncroSim.Common;
 
 namespace SyncroSim.Epidemic
 {
-    class PopulationMap : MapBaseMK1SK1<Population>
+    class PopulationMap : MapBase
     {
+        private MultiLevelKeyMap1<Population> m_Map = new MultiLevelKeyMap1<Population>();
+
         public PopulationMap(Scenario scenario, PopulationCollection items) : base(scenario)
         {
             foreach (Population Item in items)
@@ -16,28 +19,33 @@ namespace SyncroSim.Epidemic
             }
         }
 
-        public Population GetPopulation(int jurisdictionId, int iteration)
+        public Population GetPopulation(int jurisdictionId)
         {
-            return base.GetItem(jurisdictionId, iteration);
+            if (!this.HasItems)
+            {
+                return null;
+            }
+            else
+            {
+                return this.m_Map.GetItem(jurisdictionId);
+            }
         }
 
         private void TryAddItem(Population item)
         {
-            try
-            {
-                this.AddItem(item.JurisdictionId, item.Iteration, item);
-            }
-            catch (MapDuplicateItemException)
+            if (this.m_Map.GetItemExact(item.JurisdictionId) != null)
             {
                 string template =
                     "A duplicate population was detected: More information:" +
                     Environment.NewLine +
-                    "Jurisdiction={0}, Iteration={1}";
+                    "Jurisdiction={0}";
 
                 Shared.ThrowEpidemicException(template,
-                    this.GetJurisdictionName(item.JurisdictionId),
-                    MapBase.FormatValue(item.Iteration));
+                    this.GetJurisdictionName(item.JurisdictionId));
             }
+
+            this.m_Map.AddItem(item.JurisdictionId, item);
+            this.SetHasItems();
         }
     }
 }

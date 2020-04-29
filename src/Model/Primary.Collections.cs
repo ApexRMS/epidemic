@@ -66,7 +66,6 @@ namespace SyncroSim.Epidemic
             foreach (DataRow dr in ds.GetData().Rows)
             {
                 this.m_Populations.Add(new Population(
-                    Shared.GetNullableInt(dr, Shared.ITERATION_COLUMN_NAME),
                     Convert.ToInt32(dr[Shared.JURISDICTION_COLUMN_NAME]),
                     Convert.ToDouble(dr[Shared.DATASHEET_POPULATION_TOTAL_SIZE_COLUMN_NAME])));
             }

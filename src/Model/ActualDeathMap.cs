@@ -21,7 +21,14 @@ namespace SyncroSim.Epidemic
 
         public ActualDeath GetActualDeath(int jurisdictionId, int iteration, int timestep)
         {
-            return this.m_Map.GetItem(jurisdictionId, iteration, timestep);
+            if (!this.HasItems)
+            {
+                return null;
+            }
+            else
+            {
+                return this.m_Map.GetItem(jurisdictionId, iteration, timestep);
+            }
         }
 
         public double GetActualDeathValue(int jurisdictionId, int iteration, int timestep)
@@ -54,6 +61,7 @@ namespace SyncroSim.Epidemic
             }
 
             this.m_Map.AddItem(item.JurisdictionId, item.Iteration, item.Timestep, item);
+            this.SetHasItems();
         }
     }
 }

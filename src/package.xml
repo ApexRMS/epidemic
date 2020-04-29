@@ -65,7 +65,6 @@
               <columns>
                 <column name="PopulationID" dataType="Integer" isPrimary="True"/>
                 <column name="ScenarioID" dataType="Integer"/>
-                <column name="Iteration" dataType="Integer" validationType="WholeNumber" validationCondition="Greater" formula1="0" format="d" isOptional="True"/>
                 <column name="Jurisdiction" dataType="Integer" validationType="Datasheet" formula1="Jurisdiction" displayNameSource="Terminology" displayNameColumn="JurisdictionLabel" allowDbNull="False" />
                 <column name="TotalSize" displayName="Population" dataType="Double" validationType="Decimal" validationCondition="GreaterEqual" formula1="0" format="N0" allowDbNull="False" />
               </columns>

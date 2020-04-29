@@ -16,13 +16,14 @@ namespace SyncroSim.Epidemic
                     this.SetLoopStatus(Iteration, Juris);
 
                     ModelStateMap State = new ModelStateMap();
+                    Population Pop = this.GetPopulation(Juris.Id);
 
                     for (int Timestep = this.MinimumTimestep; Timestep <= this.MaximumTimestep; Timestep++)
                     {
                         this.CheckForCancel();
                         this.ResampleForTimestep(Iteration, Timestep);
                         ModelState ThisTimestep = this.CreateTimestepModelState(Juris.Id, Iteration, Timestep);
-                        double MaxInfections = this.GetMaxInfections(ThisTimestep);
+                        double MaxInfections = Pop.TotalSize * ThisTimestep.AttackRate;
 
                         if (Timestep != this.MinimumTimestep)
                         {
@@ -87,7 +88,8 @@ namespace SyncroSim.Epidemic
 
                                     if (t != null)
                                     {
-                                        ThisTimestep.Deaths = t.Infected * t.FatalityRate;
+                                        ThisTimestep.Deaths = this.m_DistributionProvider.RandomGenerator.GetRandomBinomial(
+                                            t.FatalityRate, (int)t.Infected);
                                     }
                                     else
                                     {
