@@ -15,6 +15,7 @@ namespace SyncroSim.Epidemic
         private PopulationCollection m_Populations = new PopulationCollection();
         private ActualDeathCollection m_ActualDeaths = new ActualDeathCollection();
         private GrowthRateCollection m_GrowthRates = new GrowthRateCollection();
+        private GrowthRateMultiplierCollection m_GrowthRateMultipliers = new GrowthRateMultiplierCollection();
         private FatalityRateCollection m_FatalityRates = new FatalityRateCollection();
         private AttackRateCollection m_AttackRates = new AttackRateCollection();
         private ModelTypeCollection m_ModelTypes = new ModelTypeCollection();
@@ -29,6 +30,7 @@ namespace SyncroSim.Epidemic
             this.FillPopulationCollection();
             this.FillActualDeathCollection(RunControlStartDate);
             this.FillGrowthRateCollection(RunControlStartDate);
+            this.FillGrowthRateMultiplierCollection(RunControlStartDate);
             this.FillFatalityRateCollection(RunControlStartDate);
             this.FillAttackRateCollection(RunControlStartDate);
             this.FillModelTypeCollection(RunControlStartDate);
@@ -84,12 +86,39 @@ namespace SyncroSim.Epidemic
                     continue;
                 }
 
-                ActualDeath Item = new ActualDeath(
-                    timestep.Value,
-                    Convert.ToInt32(dr[Shared.JURISDICTION_COLUMN_NAME]),
-                    Convert.ToDouble(dr[Shared.VALUE_COLUMN_NAME]));
+                DistributionFrequency? df = null;
 
-                this.m_ActualDeaths.Add(Item);
+                if (dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME] != DBNull.Value)
+                {
+                    df = (DistributionFrequency)(long)dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME];
+                }
+
+                ActualDeath Item = new ActualDeath(
+                    Shared.GetNullableInt(dr, Shared.ITERATION_COLUMN_NAME),
+                    timestep,
+                    Shared.GetNullableInt(dr, Shared.JURISDICTION_COLUMN_NAME),
+                    Shared.GetNullableDouble(dr, Shared.VALUE_COLUMN_NAME),
+                    Shared.GetNullableInt(dr, Shared.DISTRIBUTION_TYPE_COLUMN_NAME),
+                    df,
+                    Shared.GetNullableDouble(dr, Shared.DISTRIBUTIONSD_COLUMN_NAME),
+                    Shared.GetNullableDouble(dr, Shared.DISTRIBUTIONMIN_COLUMN_NAME),
+                    Shared.GetNullableDouble(dr, Shared.DISTRIBUTIONMAX_COLUMN_NAME));
+
+                try
+                {
+                    this.m_DistributionProvider.Validate(
+                        Item.DistributionTypeId,
+                        Item.DistributionValue,
+                        Item.DistributionSD,
+                        Item.DistributionMin,
+                        Item.DistributionMax);
+
+                    this.m_ActualDeaths.Add(Item);
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException(ds.DisplayName + " -> " + ex.Message);
+                }
             }
         }
 
@@ -135,6 +164,56 @@ namespace SyncroSim.Epidemic
                         Item.DistributionMax);
 
                     this.m_GrowthRates.Add(Item);
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException(ds.DisplayName + " -> " + ex.Message);
+                }
+            }
+        }
+
+        private void FillGrowthRateMultiplierCollection(DateTime startDate)
+        {
+            Debug.Assert(this.m_GrowthRateMultipliers.Count == 0);
+            DataSheet ds = this.ResultScenario.GetDataSheet(Shared.DATASHEET_GROWTH_RATE_MULTIPLIER_NAME);
+
+            foreach (DataRow dr in ds.GetData().Rows)
+            {
+                int? timestep = null;
+
+                if (!TimestepFromDateTime(dr, startDate, out timestep))
+                {
+                    continue;
+                }
+
+                DistributionFrequency? df = null;
+
+                if (dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME] != DBNull.Value)
+                {
+                    df = (DistributionFrequency)(long)dr[Shared.DISTRIBUTION_FREQUENCY_COLUMN_NAME];
+                }
+
+                GrowthRateMultiplier Item = new GrowthRateMultiplier(
+                    Shared.GetNullableInt(dr, Shared.ITERATION_COLUMN_NAME),
+                    timestep,
+                    Shared.GetNullableInt(dr, Shared.JURISDICTION_COLUMN_NAME),
+                    Shared.GetNullableDouble(dr, Shared.VALUE_COLUMN_NAME),
+                    Shared.GetNullableInt(dr, Shared.DISTRIBUTION_TYPE_COLUMN_NAME),
+                    df,
+                    Shared.GetNullableDouble(dr, Shared.DISTRIBUTIONSD_COLUMN_NAME),
+                    Shared.GetNullableDouble(dr, Shared.DISTRIBUTIONMIN_COLUMN_NAME),
+                    Shared.GetNullableDouble(dr, Shared.DISTRIBUTIONMAX_COLUMN_NAME));
+
+                try
+                {
+                    this.m_DistributionProvider.Validate(
+                        Item.DistributionTypeId,
+                        Item.DistributionValue,
+                        Item.DistributionSD,
+                        Item.DistributionMin,
+                        Item.DistributionMax);
+
+                    this.m_GrowthRateMultipliers.Add(Item);
                 }
                 catch (Exception ex)
                 {

@@ -5,9 +5,9 @@ using SyncroSim.StochasticTime;
 
 namespace SyncroSim.Epidemic
 {
-    class ActualDeath : EPDistributionBase
+    class GrowthRateMultiplier : EPDistributionBase
     {
-        public ActualDeath(
+        public GrowthRateMultiplier(
             int? iteration,
             int? timestep,
             int? jurisdictionId,
@@ -24,7 +24,7 @@ namespace SyncroSim.Epidemic
 
         public override EPDistributionBase Clone()
         {
-            return new ActualDeath(
+            return new GrowthRateMultiplier(
                 this.Iteration,
                 this.Timestep,
                 this.JurisdictionId,

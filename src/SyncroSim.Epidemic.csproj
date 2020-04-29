@@ -99,10 +99,12 @@
     <Compile Include="Model\AttackRate.cs" />
     <Compile Include="Model\AttackRateCollection.cs" />
     <Compile Include="Model\AttackRateMap.cs" />
+    <Compile Include="Model\GrowthRateMultiplier.cs" />
+    <Compile Include="Model\GrowthRateMultiplierCollection.cs" />
+    <Compile Include="Model\GrowthRateMultiplierMap.cs" />
     <Compile Include="Model\MapBase.cs" />
     <Compile Include="Model\MapBaseMK1SK1.cs" />
     <Compile Include="Model\MapBaseMK1SK2.cs" />
-    <Compile Include="Model\MapBaseMK2KS1.cs" />
     <Compile Include="Model\EPDistributionBase.cs" />
     <Compile Include="Model\EPDistributionBaseExpander.cs" />
     <Compile Include="Model\EPDistributionProvider.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Model\SymptomPeriodCollection.cs" />
     <Compile Include="Model\SymptomPeriodMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Updates\Updates.cs" />
     <Compile Include="Views\DistributionValueDataFeedView.cs">
       <SubType>UserControl</SubType>
     </Compile>

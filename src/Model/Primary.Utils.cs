@@ -59,11 +59,14 @@ namespace SyncroSim.Epidemic
         private ModelState CreateTimestepModelState(int jurisdictionId, int iteration, int timestep)
         {
             double GrowthRate = this.m_GrowthRateMap.GetGrowthRateValue(jurisdictionId, iteration, timestep);
+            double GrowthRateMultiplier = this.m_GrowthRateMultiplierMap.GetGrowthRateMultiplierValue(jurisdictionId, iteration, timestep);
             double FatalityRate = this.m_FatalityRateMap.GetFatalityRateValue(jurisdictionId, iteration, timestep);
             double AttackRate = this.m_AttackRateMap.GetAttackRateValue(jurisdictionId, iteration, timestep);
             double IncubationPeriod = this.m_IncubationPeriodMap.GetIncubationPeriodValue(jurisdictionId, iteration, timestep);
             double SymptomPeriod = this.m_SymptomPeriodMap.GetSymptomPeriodValue(jurisdictionId, iteration, timestep);
             double InfectedPeriod = IncubationPeriod + SymptomPeriod;
+
+            GrowthRate *= GrowthRateMultiplier;
 
             return new ModelState(
                 jurisdictionId,

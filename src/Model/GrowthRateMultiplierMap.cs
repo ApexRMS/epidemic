@@ -3,30 +3,27 @@
 
 using System;
 using SyncroSim.Core;
-using SyncroSim.Common;
 
 namespace SyncroSim.Epidemic
 {
-    class ActualDeathMap : MapBase
+    class GrowthRateMultiplierMap : MapBaseMK1SK2<GrowthRateMultiplier>
     {
-        MultiLevelKeyMap3<ActualDeath> m_Map = new MultiLevelKeyMap3<ActualDeath>();
-
-        public ActualDeathMap(Scenario scenario, ActualDeathCollection items) : base(scenario)
+        public GrowthRateMultiplierMap(Scenario scenario, GrowthRateMultiplierCollection items) : base(scenario)
         {
-            foreach (ActualDeath Item in items)
+            foreach (GrowthRateMultiplier Item in items)
             {
                 this.TryAddItem(Item);
             }
         }
 
-        public ActualDeath GetActualDeath(int jurisdictionId, int iteration, int timestep)
+        public GrowthRateMultiplier GetGrowthRateMultiplier(int jurisdictionId, int iteration, int timestep)
         {
-            return this.m_Map.GetItem(jurisdictionId, iteration, timestep);
+            return base.GetItem(jurisdictionId, iteration, timestep);
         }
 
-        public double GetActualDeathValue(int jurisdictionId, int iteration, int timestep)
+        public double GetGrowthRateMultiplierValue(int jurisdictionId, int iteration, int timestep)
         {
-            ActualDeath Item = this.GetActualDeath(jurisdictionId, iteration, timestep);
+            GrowthRateMultiplier Item = this.GetGrowthRateMultiplier(jurisdictionId, iteration, timestep);
 
             if (Item != null)
             {
@@ -38,12 +35,16 @@ namespace SyncroSim.Epidemic
             }
         }
 
-        private void TryAddItem(ActualDeath item)
+        private void TryAddItem(GrowthRateMultiplier item)
         {
-            if (this.m_Map.GetItemExact(item.JurisdictionId, item.Iteration, item.Timestep) != null)
+            try
+            {
+                this.AddItem(item.JurisdictionId, item.Iteration, item.Timestep, item);
+            }
+            catch (MapDuplicateItemException)
             {
                 string template =
-                    "A duplicate death was detected: More information:" +
+                    "A duplicate growth rate multiplier was detected: More information:" +
                     Environment.NewLine +
                     "Jurisdiction={0}, Iteration={1}, Timestep={2}";
 
@@ -52,8 +53,6 @@ namespace SyncroSim.Epidemic
                     MapBase.FormatValue(item.Iteration),
                     MapBase.FormatValue(item.Timestep));
             }
-
-            this.m_Map.AddItem(item.JurisdictionId, item.Iteration, item.Timestep, item);
         }
     }
 }

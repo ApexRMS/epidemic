@@ -60,6 +60,9 @@ namespace SyncroSim.Epidemic
         //Growth Rate
         public const string  DATASHEET_GROWTH_RATE_NAME = "epidemic_GrowthRate";
 
+        //Growth Rate Multiplier
+        public const string  DATASHEET_GROWTH_RATE_MULTIPLIER_NAME = "epidemic_GrowthRateMultiplier";
+
         //Fatality Rate
         public const string DATASHEET_FATALITY_RATE_NAME = "epidemic_FatalityRate";
 

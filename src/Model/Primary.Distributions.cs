@@ -27,7 +27,9 @@ namespace SyncroSim.Epidemic
         {
             this.m_DistributionProvider.InitializeExternalVariableValues();
             this.m_DistributionProvider.InitializeDistributionValues();
+            this.initializeActualDeathDistributions();
             this.InitializeGrowthRateDistributions();
+            this.InitializeGrowthRateMultiplierDistributions();
             this.InitializeFatalityRateDistributions();
             this.InitializeIncubationPeriodDistributions();
             this.InitializeSymptomPeriodDistributions();
@@ -38,7 +40,9 @@ namespace SyncroSim.Epidemic
         {
             this.ResampleExternalVariableValues(iteration, this.MinimumTimestep, DistributionFrequency.Iteration);
             this.ResampleDistributionValues(iteration, this.MinimumTimestep, DistributionFrequency.Iteration);
+            this.ResampleActualDeaths(iteration, this.MinimumTimestep, DistributionFrequency.Iteration);
             this.ResampleGrowthRates(iteration, this.MinimumTimestep, DistributionFrequency.Iteration);
+            this.ResampleGrowthRateMultipliers(iteration, this.MinimumTimestep, DistributionFrequency.Iteration);
             this.ResampleFatalityRates(iteration, this.MinimumTimestep, DistributionFrequency.Iteration);
             this.ResampleIncubationPeriods(iteration, this.MinimumTimestep, DistributionFrequency.Iteration);
             this.ResampleSymptomPeriods(iteration, this.MinimumTimestep, DistributionFrequency.Iteration);
@@ -49,7 +53,9 @@ namespace SyncroSim.Epidemic
         {
             this.ResampleExternalVariableValues(iteration, timestep, DistributionFrequency.Timestep);
             this.ResampleDistributionValues(iteration, timestep, DistributionFrequency.Timestep);
+            this.ResampleActualDeaths(iteration, timestep, DistributionFrequency.Timestep);
             this.ResampleGrowthRates(iteration, timestep, DistributionFrequency.Timestep);
+            this.ResampleGrowthRateMultipliers(iteration, timestep, DistributionFrequency.Timestep);
             this.ResampleFatalityRates(iteration, timestep, DistributionFrequency.Timestep);
             this.ResampleIncubationPeriods(iteration, timestep, DistributionFrequency.Timestep);
             this.ResampleSymptomPeriods(iteration, timestep, DistributionFrequency.Timestep);
@@ -63,11 +69,31 @@ namespace SyncroSim.Epidemic
                 EPDistributionBaseExpander Expander = 
                     new EPDistributionBaseExpander(this.m_DistributionProvider);
 
+                this.ExpandActualDeaths(Expander);
                 this.ExpandGrowthRates(Expander);
+                this.ExpandGrowthRateMultipliers(Expander);
                 this.ExpandFatalityRates(Expander);
                 this.ExpandIncubationPeriods(Expander);
                 this.ExpandSymptomPeriods(Expander);
                 this.ExpandAttackRates(Expander);
+            }
+        }
+
+        private void initializeActualDeathDistributions()
+        {
+            try
+            {
+                foreach (ActualDeath t in this.m_ActualDeaths)
+                {
+                    if (!t.IsDisabled)
+                    {
+                        t.Initialize(this.MinimumIteration, this.MinimumTimestep, this.m_DistributionProvider);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Shared.ThrowEpidemicException("Actual Deaths" + " -> " + ex.Message);
             }
         }
 
@@ -86,6 +112,24 @@ namespace SyncroSim.Epidemic
             catch (Exception ex)
             {
                 Shared.ThrowEpidemicException("Growth Rates" + " -> " + ex.Message);
+            }
+        }
+
+        private void InitializeGrowthRateMultiplierDistributions()
+        {
+            try
+            {
+                foreach (GrowthRateMultiplier t in this.m_GrowthRateMultipliers)
+                {
+                    if (!t.IsDisabled)
+                    {
+                        t.Initialize(this.MinimumIteration, this.MinimumTimestep, this.m_DistributionProvider);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Shared.ThrowEpidemicException("Growth Rate Multipliers" + " -> " + ex.Message);
             }
         }
 
@@ -185,6 +229,24 @@ namespace SyncroSim.Epidemic
             }
         }
 
+        private void ResampleActualDeaths(int iteration, int timestep, DistributionFrequency frequency)
+        {
+            try
+            {
+                foreach (ActualDeath t in this.m_ActualDeaths)
+                {
+                    if (!t.IsDisabled)
+                    {
+                        t.Sample(iteration, timestep, this.m_DistributionProvider, frequency);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Shared.ThrowEpidemicException("Actual Deaths" + " -> " + ex.Message);
+            }
+        }
+
         private void ResampleGrowthRates(int iteration, int timestep, DistributionFrequency frequency)
         {
             try
@@ -200,6 +262,24 @@ namespace SyncroSim.Epidemic
             catch (Exception ex)
             {
                 Shared.ThrowEpidemicException("Growth Rates" + " -> " + ex.Message);
+            }
+        }
+
+        private void ResampleGrowthRateMultipliers(int iteration, int timestep, DistributionFrequency frequency)
+        {
+            try
+            {
+                foreach (GrowthRateMultiplier t in this.m_GrowthRateMultipliers)
+                {
+                    if (!t.IsDisabled)
+                    {
+                        t.Sample(iteration, timestep, this.m_DistributionProvider, frequency);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Shared.ThrowEpidemicException("Growth Rate Multipliers" + " -> " + ex.Message);
             }
         }
 
@@ -275,6 +355,21 @@ namespace SyncroSim.Epidemic
             }
         }
 
+        private void ExpandActualDeaths(EPDistributionBaseExpander expander)
+        {
+            if (this.m_ActualDeaths.Count > 0)
+            {
+                IEnumerable<EPDistributionBase> NewItems = expander.Expand(this.m_ActualDeaths);
+
+                this.m_ActualDeaths.Clear();
+
+                foreach (ActualDeath t in NewItems)
+                {
+                    this.m_ActualDeaths.Add(t);
+                }
+            }
+        }
+
         private void ExpandGrowthRates(EPDistributionBaseExpander expander)
         {
             if (this.m_GrowthRates.Count > 0)
@@ -286,6 +381,21 @@ namespace SyncroSim.Epidemic
                 foreach (GrowthRate t in NewItems)
                 {
                     this.m_GrowthRates.Add(t);
+                }
+            }
+        }
+
+        private void ExpandGrowthRateMultipliers(EPDistributionBaseExpander expander)
+        {
+            if (this.m_GrowthRateMultipliers.Count > 0)
+            {
+                IEnumerable<EPDistributionBase> NewItems = expander.Expand(this.m_GrowthRateMultipliers);
+
+                this.m_GrowthRateMultipliers.Clear();
+
+                foreach (GrowthRateMultiplier t in NewItems)
+                {
+                    this.m_GrowthRateMultipliers.Add(t);
                 }
             }
         }

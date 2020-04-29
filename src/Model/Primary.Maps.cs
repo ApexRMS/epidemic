@@ -8,6 +8,7 @@ namespace SyncroSim.Epidemic
         private PopulationMap m_PopulationMap;
         private ActualDeathMap m_ActualDeathMap;
         private GrowthRateMap m_GrowthRateMap;
+        private GrowthRateMultiplierMap m_GrowthRateMultiplierMap;
         private FatalityRateMap m_FatalityRateMap;
         private AttackRateMap m_AttackRateMap;
         private ModelTypeMap m_ModelTypeMap;
@@ -17,8 +18,9 @@ namespace SyncroSim.Epidemic
         private void CreateCollectionMaps()
         {
             this.m_PopulationMap = new PopulationMap(this.ResultScenario, this.m_Populations);
-            this.m_ActualDeathMap = new ActualDeathMap(this.m_ActualDeaths);
+            this.m_ActualDeathMap = new ActualDeathMap(this.ResultScenario, this.m_ActualDeaths);
             this.m_GrowthRateMap = new GrowthRateMap(this.ResultScenario, this.m_GrowthRates);
+            this.m_GrowthRateMultiplierMap = new GrowthRateMultiplierMap(this.ResultScenario, this.m_GrowthRateMultipliers);
             this.m_FatalityRateMap = new FatalityRateMap(this.ResultScenario, this.m_FatalityRates);
             this.m_AttackRateMap = new AttackRateMap(this.ResultScenario, this.m_AttackRates);
             this.m_ModelTypeMap = new ModelTypeMap(this.ResultScenario, this.m_ModelTypes);

@@ -28,12 +28,12 @@ namespace SyncroSim.Epidemic
                         {
                             ModelState PrevTimestep = State.GetItem(Timestep - 1);
                             int TimestepAdjusted = Timestep + (int)ThisTimestep.InfectedPeriod;
-                            ActualDeath DeathRec = this.m_ActualDeathMap.GetActualDeath(Juris.Id, TimestepAdjusted);
+                            ActualDeath DeathRec = this.m_ActualDeathMap.GetActualDeath(Juris.Id, Iteration, TimestepAdjusted);
 
                             if (DeathRec != null)
                             {
                                 //Calculate infections based on later deaths
-                                ThisTimestep.Infected = DeathRec.Value / ThisTimestep.FatalityRate;
+                                ThisTimestep.Infected = DeathRec.CurrentValue.Value / ThisTimestep.FatalityRate;
                                 ThisTimestep.CumulativeInfected = PrevTimestep.CumulativeInfected + ThisTimestep.Infected;
                             }
                             else
@@ -71,12 +71,12 @@ namespace SyncroSim.Epidemic
                                 ThisTimestep.Infected = ThisTimestep.CumulativeInfected - PrevTimestep.CumulativeInfected;
                             }
 
-                            DeathRec = this.m_ActualDeathMap.GetActualDeath(Juris.Id, Timestep);
+                            DeathRec = this.m_ActualDeathMap.GetActualDeath(Juris.Id, Iteration, Timestep);
 
-                            if (DeathRec != null && DeathRec.Value > 0 && !this.m_ModelHistoricalDeaths)
+                            if (DeathRec != null && DeathRec.CurrentValue.Value > 0 && !this.m_ModelHistoricalDeaths)
                             {
                                 //Set deaths to actual values if they exist
-                                ThisTimestep.Deaths = DeathRec.Value;
+                                ThisTimestep.Deaths = DeathRec.CurrentValue.Value;
                             }
                             else
                             {
