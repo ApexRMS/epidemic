@@ -7,4 +7,4 @@ At present *epidemic* allows users to choose from one of two infection growth fo
 
 The modeling framework behind *epidemic* is general enough that it can be applied to any jurisdiction and any disease. Furthermore, because it has been developed using the SyncroSim simulation engine, it is straightforward for users to explore and compare alternative future “what-if” scenarios regarding possible changes in model inputs that might result from changes in public health measures over time. 
 
-Additional documentation for the *epidemic* Package can be found at www.modelthecurve.ca, along with a demonstration of how the package has been applied nationally and provincially in Canada to model the growth of COVID-19.
+Additional documentation for the *epidemic* Package can be found at www.apexrms.com/covid19, along with a demonstration of how the package has been applied nationally and provincially in Canada to model the growth of COVID-19.
