@@ -1,0 +1,37 @@
+/* Color of links and other bits an bolts of the website set as the same than on SyncroSim website */
+:root {
+  --apexRed: #720d0d;
+}
+
+/* Links */
+a {
+  color: var(--apexRed);
+}
+
+/* Little Arrow + navbars */
+.nav-list .nav-list-item .nav-list-expander{
+  color: var(--apexRed);
+}
+
+.icon {
+  color: var(--apexRed);
+}
+
+.main-content .anchor-heading svg {
+  color: var(--apexRed);
+}
+
+/* Selection of elements */
+::selection {
+    color: #fff;
+    background: var(--apexRed);
+}
+
+/* Active search */
+.search-input:focus+.search-label .search-icon {
+    color: var(--apexRed);
+}
+
+.search-result-doc .search-result-icon {
+    color: var(--apexRed);
+}
