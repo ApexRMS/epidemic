@@ -12,8 +12,6 @@ nav_order: 2
 
 A prototype version of our framework, including a case study example providing real-time daily [online COVID-19 forecasts](https://apexrms.shinyapps.io/covid19canada/) for Canada and its provinces, is demonstrated through [this short video](http://www.youtube.com/watch?feature=player_embedded&v=txtFYwzLoIY).
 
-&nbsp;
-
 Additional details are provided in an accompanying [whitepaper](http://apexrms.com/dwnld/covid-19-canada-framework-whitepaper.pdf).
 
 &nbsp;
