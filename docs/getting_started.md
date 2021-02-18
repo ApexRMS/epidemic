@@ -5,7 +5,6 @@ nav_order: 2
 ---
 
 ## Getting started with **Epidemic**: a COVID-19 model example
-### *Visit the [ApexRMS website](https://apexrms.com/covid-19-modeling/) for more on our work to model the COVID-19 pandemic*
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=txtFYwzLoIY" target="_blank"><img src="assets/images/video-screen-cap.png" alt="COVID-19 modeling video tutorial" width="240" align="right" style="padding: 10px" width="400" /></a>
 
@@ -20,3 +19,5 @@ Additional details are provided in an accompanying [whitepaper](http://apexrms.c
 3. Create a new model library using the latest COVID-19 template library for Canada by selecting **File -> New Library…** then selecting the epidemic base package and the COVID-19 Canada template. *Note: template libraries are updated daily with the latest Canadian and international data ensuring that new libraries generate updated real-time forecasts every day*.
 4. Select the scenario you would like to simulate (e.g., “*Current measures: Canada (base fatality)*”) and select **Scenario -> Run** to run the simulation.
 5. View the results by double-clicking on the Deaths and Infected chart on the lower left of the Library Explorer window.
+
+*Visit the [ApexRMS website](https://apexrms.com/covid-19-modeling/) for more on our work to model the COVID-19 pandemic*
