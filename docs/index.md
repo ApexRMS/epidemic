@@ -7,7 +7,7 @@ permalink: /
 ---
 
 # **Epidemic** Syncrosim Package
-## |Model of epidemic infections and deaths|
+## Model of epidemic infections and deaths
 ### *Epidemic* is an open-source SyncroSim Base Package that provides a general framework for developing scenario-based stochastic models of future daily epidemic infections and deaths.
 
 <img align="right" style="padding: 10px" width="370" src="assets/images/epidemic-screen-cap.png">
