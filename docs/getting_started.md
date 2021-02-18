@@ -12,9 +12,7 @@ A prototype version of our framework, including a case study example providing r
 
 Additional details are provided in an accompanying [whitepaper](http://apexrms.com/dwnld/covid-19-canada-framework-whitepaper.pdf).
 
-&nbsp;
-
-#### To generate daily COVID-19 forecasts for your jurisdiction:
+### To generate daily COVID-19 forecasts for your jurisdiction:
 
 1. Download and install SyncroSim
 2. Open SyncroSim and select **File -> Packages… -> Install…**, select the epidemic Package and click OK.
