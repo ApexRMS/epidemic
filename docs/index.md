@@ -7,6 +7,7 @@ permalink: /
 ---
 
 # **Epidemic** Syncrosim Package
+#### Current version: 1.0.3
 ## Model of epidemic infections and deaths
 ### *Epidemic* is an open-source SyncroSim Base Package that provides a general framework for developing scenario-based stochastic models of future daily epidemic infections and deaths.
 
@@ -23,7 +24,6 @@ The modeling framework behind epidemic is general enough that it can be applied 
 This package requires Syncrosim [version 2.2.27](https://syncrosim.com/download/).
 
 ### How to install
-#### Current version: 1.0.3
 
 Open SyncroSim and select **File -> Packages… -> Install…**, then select the **epidemic** package and click OK.
 
