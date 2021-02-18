@@ -25,4 +25,6 @@ This package requires Syncrosim [version 2.2.27](https://syncrosim.com/download/
 ### How to install
 #### Current version: 1.0.3
 
-To install, download [the latest release](https://github.com/ApexRMS/epidemic/releases/tag/1.0.3). Open Syncrosim and navigate to packages, then install from file.
+Open SyncroSim and select **File | Packages… | Install…**, then select the **epidemic** package and click OK.
+
+Alternatively, download [the latest release](https://github.com/ApexRMS/epidemic/releases/tag/1.0.3). Open Syncrosim and navigate to packages, then install from file.
