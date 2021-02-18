@@ -8,9 +8,11 @@ nav_order: 2
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=txtFYwzLoIY" target="_blank"><img src="assets/images/video-screen-cap.png" alt="COVID-19 modeling video tutorial" width="240" align="right" style="padding: 10px" width="400" /></a>
 
-A prototype version of our framework, including a case study example providing real-time daily [online COVID-19 forecasts](https://apexrms.shinyapps.io/covid19canada/) for Canada and its provinces, is demonstrated through [a short video](http://www.youtube.com/watch?feature=player_embedded&v=txtFYwzLoIY)
+A prototype version of our framework, including a case study example providing real-time daily [online COVID-19 forecasts](https://apexrms.shinyapps.io/covid19canada/) for Canada and its provinces, is demonstrated through [this short video](http://www.youtube.com/watch?feature=player_embedded&v=txtFYwzLoIY).
 
 Additional details are provided in an accompanying [whitepaper](http://apexrms.com/dwnld/covid-19-canada-framework-whitepaper.pdf).
+
+&nbsp;
 
 #### To generate daily COVID-19 forecasts for your jurisdiction:
 
