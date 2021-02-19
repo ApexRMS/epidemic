@@ -12,7 +12,7 @@ permalink: /
 ## Model of epidemic infections and deaths
 ### *Epidemic* is an open-source SyncroSim Base Package that provides a general framework for developing scenario-based stochastic models of future daily epidemic infections and deaths.
 
-
+<img align="right" style="padding: 10px" width="370" src="assets/images/epidemic-screen-cap.png">
 
 The framework takes as input a time series of actual daily reported deaths, along with a user-supplied fatality rate and infection period, and back-calculates the number of infections that gave rise to the recorded deaths. Based on these presumed infections, the model then projects future infections forward in time based on an exogenously estimated time series of future daily infection growth rates.
 
