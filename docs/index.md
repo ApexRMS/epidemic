@@ -7,7 +7,6 @@ permalink: /
 ---
 
 # **Epidemic** Syncrosim Package
-/* #### Current version: 1.0.3 */
 [![GitHub release](https://img.shields.io/github/release/ApexRMS/epidemic.svg)](https://GitHub.com/ApexRMS/epidemic/releases/)
 #### [Github Repository](https://github.com/ApexRMS/epidemic)
 ## Model of epidemic infections and deaths
