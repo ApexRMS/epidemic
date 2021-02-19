@@ -8,6 +8,7 @@ permalink: /
 
 # **Epidemic** Syncrosim Package
 #### Current version: 1.0.3
+#### [Github Repository](https://github.com/ApexRMS/epidemic)
 ## Model of epidemic infections and deaths
 ### *Epidemic* is an open-source SyncroSim Base Package that provides a general framework for developing scenario-based stochastic models of future daily epidemic infections and deaths.
 
