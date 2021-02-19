@@ -23,15 +23,20 @@ a {
 
 /* Selection of elements */
 ::selection {
-    color: #fff;
-    background: var(--apexOrange);
+  color: #fff;
+  background: var(--apexOrange);
 }
 
 /* Active search */
 .search-input:focus+.search-label .search-icon {
-    color: var(--apexOrange);
+  color: var(--apexOrange);
 }
 
 .search-result-doc .search-result-icon {
-    color: var(--apexOrange);
+  color: var(--apexOrange);
+}
+
+/* Only if svg logo */
+  .site-logo {
+  color: var(--apexOrange);
 }
