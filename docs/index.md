@@ -18,7 +18,7 @@ The framework takes as input a time series of actual daily reported deaths, alon
 
 At present **Epidemic** allows users to choose from one of two infection growth forms: exponential and logistic. For the logistic growth model, the framework bounds the upper level of possible infections through the specification of a population size and attack rate. Other model growth forms could easily be added in the future. All model projections use the built-in Monte Carlo simulation engine of SyncroSim – as a result model inputs are generally specified as space and time-varying distributions, leading to model projections that include estimates of uncertainty and spatiotemporal variability.
 
-The modeling framework behind epidemic is general enough that it can be applied to any jurisdiction and any disease. Furthermore, because it has been developed using the SyncroSim simulation engine, it is straightforward for users to explore and compare alternative future “what-if” scenarios regarding possible changes in model inputs that might result from changes in public health measures over time.
+The modeling framework behind Epidemic is general enough that it can be applied to any jurisdiction and any disease. Furthermore, because it has been developed using the SyncroSim simulation engine, it is straightforward for users to explore and compare alternative future “what-if” scenarios regarding possible changes in model inputs that might result from changes in public health measures over time.
 
 ### Requirements
 
