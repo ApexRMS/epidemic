@@ -5,21 +5,17 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   aria-hidden="true"
-   focusable="false"
-   data-prefix="fas"
-   data-icon="virus"
-   class="svg-inline--fa fa-virus fa-w-16"
-   role="img"
-   viewBox="0 0 2608.9915 511.98001"
-   version="1.1"
-   id="svg68"
-   sodipodi:docname="virus-solid-text.svg"
-   width="2608.9915"
    height="511.98001"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+   width="2608.9915"
+   id="svg68"
+   version="1.1"
+   viewBox="0 0 2608.9915 511.98001"
+   role="img"
+   class="svg-inline--fa fa-virus fa-w-16"
+   data-icon="virus"
+   data-prefix="fas"
+   focusable="false"
+   aria-hidden="true">
   <metadata
      id="metadata74">
     <rdf:RDF>
@@ -34,63 +30,52 @@
   </metadata>
   <defs
      id="defs72" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1875"
-     inkscape:window-height="1016"
-     id="namedview70"
-     showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:zoom="0.35455254"
-     inkscape:cx="1487.9867"
-     inkscape:cy="102.7418"
-     inkscape:window-x="45"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <path
-     d="m 484.08336,227.56 h -21.55 c -50.68,0 -76.07,-61.27 -40.23,-97.11 l 15.23,-15.25 a 28.44,28.44 0 0 0 -40.2,-40.190001 l -15.24,15.22 c -35.84,35.830001 -97.11,10.450001 -97.11,-40.23 v -21.55 a 28.45,28.45 0 0 0 -56.9,0 v 21.56 c 0,50.680001 -61.27,76.060001 -97.11,40.23 l -15.24,-15.23 A 28.44,28.44 0 0 0 75.533362,115.2 l 15.25,15.25 c 35.839998,35.84 10.449998,97.11 -40.23,97.11 h -21.57 a 28.45,28.45 0 1 0 0,56.89 h 21.55 c 50.679998,0 76.069998,61.28 40.23,97.12 l -15.23,15.24 a 28.45,28.45 0 0 0 40.199998,40.2 l 15.24,-15.25 c 35.84,-35.84 97.11,-10.45 97.11,40.23 v 21.54 a 28.45,28.45 0 0 0 56.9,0 v -21.52 c 0,-50.68 61.27,-76.07 97.11,-40.23 l 15.24,15.23 a 28.45,28.45 0 0 0 40.2,-40.2 l -15.25,-15.24 c -35.84,-35.84 -10.45,-97.12 40.23,-97.12 h 21.54 a 28.45,28.45 0 1 0 0,-56.89 z m -259.55,44.45 a 48,48 0 1 1 48,-48 48,48 0 0 1 -48,48 z m 80,56 a 24,24 0 1 1 24,-24 24,24 0 0 1 -24,24 z"
-     id="path66"
-     inkscape:connector-curvature="0"
-     style="fill:#d68a06" />
   <g
-     inkscape:groupmode="layer"
-     id="layer1"
-     inkscape:label="Layer 1"
-     transform="translate(0.53336198,0.00999915)">
+     style="display:inline"
+     transform="translate(0.53336198,0.00999915)"
+     id="layer1">
+    <g
+       id="g118">
+      <path
+         d="m 484.08336,227.56 h -21.55 c -50.68,0 -76.07,-61.27 -40.23,-97.11 l 15.23,-15.25 a 28.44,28.44 0 0 0 -40.2,-40.190001 l -15.24,15.22 c -35.84,35.830001 -97.11,10.450001 -97.11,-40.23 v -21.55 a 28.45,28.45 0 0 0 -56.9,0 v 21.56 c 0,50.680001 -61.27,76.060001 -97.11,40.23 l -15.24,-15.23 A 28.44,28.44 0 0 0 75.533362,115.2 l 15.25,15.25 c 35.839998,35.84 10.449998,97.11 -40.23,97.11 h -21.57 a 28.45,28.45 0 1 0 0,56.89 h 21.55 c 50.679998,0 76.069998,61.28 40.23,97.12 l -15.23,15.24 a 28.45,28.45 0 0 0 40.199998,40.2 l 15.24,-15.25 c 35.84,-35.84 97.11,-10.45 97.11,40.23 v 21.54 a 28.45,28.45 0 0 0 56.9,0 v -21.52 c 0,-50.68 61.27,-76.07 97.11,-40.23 l 15.24,15.23 a 28.45,28.45 0 0 0 40.2,-40.2 l -15.25,-15.24 c -35.84,-35.84 -10.45,-97.12 40.23,-97.12 h 21.54 a 28.45,28.45 0 1 0 0,-56.89 z m -259.55,44.45 a 48,48 0 1 1 48,-48 48,48 0 0 1 -48,48 z m 80,56 a 24,24 0 1 1 24,-24 24,24 0 0 1 -24,24 z"
+         id="path66"
+         style="fill:#d68a06"
+         transform="translate(-0.53336198,-0.00999915)" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot77"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:System-ui;-inkscape-font-specification:System-ui;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;image-rendering:auto"
+         transform="translate(-42.306847,-31.025021)"><flowRegion
+           id="flowRegion79"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:System-ui;-inkscape-font-specification:System-ui"><rect
+             id="rect81"
+             width="2153.0798"
+             height="563.24518"
+             x="534.81494"
+             y="26.486622"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:System-ui;-inkscape-font-specification:System-ui" /></flowRegion><flowPara
+           id="flowPara83"
+           style="font-size:466.66665649px;text-align:start;text-anchor:start">Epidemic</flowPara></flowRoot>      <flowRoot
+         transform="translate(-0.53336198,-0.00999915)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         id="flowRoot139"
+         xml:space="preserve"><flowRegion
+           id="flowRegion141"><rect
+             y="-331.33649"
+             x="-355.3775"
+             height="1150.7462"
+             width="3060.1953"
+             id="rect143" /></flowRegion><flowPara
+           id="flowPara145"></flowPara></flowRoot>    </g>
     <flowRoot
-       xml:space="preserve"
-       id="flowRoot77"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:System-ui;-inkscape-font-specification:System-ui;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="translate(-42.306847,-31.025021)"><flowRegion
-         id="flowRegion79"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:System-ui;-inkscape-font-specification:System-ui"><rect
-           id="rect81"
-           width="2153.0798"
-           height="563.24518"
-           x="534.81494"
-           y="26.486622"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:System-ui;-inkscape-font-specification:System-ui" /></flowRegion><flowPara
-         id="flowPara83"
-         style="font-size:466.66665649px;text-align:start;text-anchor:start">Epidemic</flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot85"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+       xml:space="preserve"><flowRegion
          id="flowRegion87"><rect
-           id="rect89"
-           width="3350.7024"
-           height="1085.8757"
+           y="-204.39595"
            x="-217.17516"
-           y="-204.39595" /></flowRegion><flowPara
+           height="1085.8757"
+           width="3350.7024"
+           id="rect89" /></flowRegion><flowPara
          id="flowPara91"></flowPara></flowRoot>  </g>
 </svg>
