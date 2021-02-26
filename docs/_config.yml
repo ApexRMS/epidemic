@@ -1,3 +1,6 @@
 title: "Epidemic Syncrosim Package Details"
-theme: jekyll-theme-architect
+remote_theme: pmarsceill/just-the-docs
+color_scheme: "light"
+search_enabled: true
+logo: "assets/images/logo/virus-solid-text.png"
 
