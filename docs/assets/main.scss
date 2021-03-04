@@ -41,8 +41,9 @@ a {
   color: var(--apexOrange);
 }
 
+// Add logo to masthead
 .site-title::before {
-	content: url("/assets/images/logo/virus-solid-text.png");
+	content: url("assets/images/logo/virus-solid-text.png");
 	display: inline-block;
 	position: relative;
 	width: 37px;
