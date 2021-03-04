@@ -1,2 +1,4 @@
 title: ""
 theme: minima
+header_pages:
+  - getting_started.md
