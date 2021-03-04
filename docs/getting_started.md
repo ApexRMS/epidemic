@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 
 ## Getting started with **Epidemic**: a COVID-19 model example
