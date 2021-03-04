@@ -5,19 +5,19 @@
 
 /* Color of links and other bits an bolts of the website set as the same than on SyncroSim website */
 :root {
-  --apexOrange: #d68a06;
+    --apexOrange: #d68a06;
 }
 
 /* Links */
 a {
-  color: var(--apexOrange);
+    color: var(--apexOrange);
 }
 
 // Add logo to masthead
 .site-title::before {
-	content: url("virus-solid.svg");
-	display: inline-block;
-	position: relative;
-	//width: 100px;
-	top: 10px;
+    content: url(images/logo/virus-solid-text.png);
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    padding-right: 10px;
 }
