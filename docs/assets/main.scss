@@ -15,7 +15,7 @@ a {
 
 // Add logo to masthead
 .site-title::before {
-    content: url(images/logo/virus-solid-text.png);
+    content: url("images/logo/virus-solid-text.svg");
     display: inline-block;
     position: relative;
     width: 40px;
