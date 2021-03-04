@@ -1,7 +1,8 @@
 ---
 ---
 
-@import "minima";
+@import "minima/skins/{{ site.minima.skin | default: 'classic' }}";
+@import "minima/initialize";
 
 /* Color of links and other bits an bolts of the website set as the same than on SyncroSim website */
 :root {
