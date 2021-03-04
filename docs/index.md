@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: Epidemic
 nav_order: 1
 description: "Landing page for the Package"
 permalink: /
