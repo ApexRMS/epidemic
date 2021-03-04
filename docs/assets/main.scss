@@ -19,10 +19,21 @@ a {
     display: inline-block;
     position: relative;
     padding-right: 10px;
-    padding-top: 10px;
+    padding-top: 17px;
 }
 
 // Background pf site header
 .site-header {
     background-color: #F0F0F0;
+}
+
+// Nav buttons
+.site-nav {
+    padding-top: 11px;
+}
+
+// Button text
+.site-nav .page-link {
+    color: --apexOrange;
+    font-size: larger;
 }
