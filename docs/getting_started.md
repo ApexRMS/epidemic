@@ -1,5 +1,6 @@
 ---
-layout: default
+layout: page
+title: Getting started
 ---
 
 ## Getting started with **Epidemic**: a COVID-19 model example
