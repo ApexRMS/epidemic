@@ -6,8 +6,8 @@ description: "Landing page for the Package"
 permalink: /
 ---
 
+<img src="assets/images/logo/virus-solid-text.png" alt="logo" width="200" align="right" style="padding: 10px"/>
 # **Epidemic** Syncrosim Package
-<img src="assets/images/logo/virus-solid-text.png" alt="logo" width="240" align="right" style="padding: 10px" width="400" /></a>
 [![GitHub release](https://img.shields.io/github/v/release/ApexRMS/epidemic.svg?style=for-the-badge&color=d68a06)](https://GitHub.com/ApexRMS/epidemic/releases/)
 #### [Github Repository](https://github.com/ApexRMS/epidemic)
 ## Model of epidemic infections and deaths
