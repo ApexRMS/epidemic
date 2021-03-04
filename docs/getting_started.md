@@ -1,7 +1,4 @@
 ---
-title:
-has_children: false
-nav_order: 2
 ---
 
 ## Getting started with **Epidemic**: a COVID-19 model example
