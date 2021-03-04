@@ -15,9 +15,9 @@ a {
 
 // Add logo to masthead
 .site-title::before {
-	content: url("assets/images/logo/virus-solid.png");
+	content: url("assets/images/logo/virus-solid.svg");
 	display: inline-block;
 	position: relative;
 	//width: 100px;
-	//top: 10px;
+	top: 10px;
 }
