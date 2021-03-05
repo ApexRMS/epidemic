@@ -45,3 +45,16 @@ a {
 .wrapper {
     max-width: calc(1200px - (30px * 2));
 }
+
+// Change footer col sizes
+.footer-col-1 {
+    width: calc(35% - (30px / 2));
+}
+
+.footer-col-2 {
+    width: calc(55% - (30px / 2));
+}
+
+.footer-col-3 {
+    width: calc(20% - (30px / 2));
+}
