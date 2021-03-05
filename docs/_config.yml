@@ -1,5 +1,8 @@
 title: "Epidemic"
 theme: minima
+description: Epidemic Syncrosim Package
+author: Apex Resource Management Solutions
+email: info@apexrms.com
 header_pages:
   - index.md
   - getting_started.md
