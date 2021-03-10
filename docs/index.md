@@ -10,7 +10,7 @@ permalink: /
 [![GitHub release](https://img.shields.io/github/v/release/ApexRMS/epidemic.svg?style=for-the-badge&color=d68a06)](https://GitHub.com/ApexRMS/epidemic/releases/)
 <br>
 <img align="left" style="padding: 8px" width="80" src="assets/images/logo/repository-icon.png">
-
+<br>
 ## Model of epidemic infections and deaths
 ### *Epidemic* is an open-source [SyncroSim](https://syncrosim.com/) Base Package that provides a general framework for developing scenario-based stochastic models of future daily epidemic infections and deaths.
 
