@@ -6,13 +6,13 @@ permalink: /
 ---
 
 # **Epidemic** Syncrosim Package
-[![GitHub release](https://img.shields.io/github/v/release/ApexRMS/epidemic.svg?style=for-the-badge&color=d68a06)](https://GitHub.com/ApexRMS/epidemic/releases/)
 <img align="right" style="padding: 13px" width="180" src="assets/images/logo/epidemic-badge-hex.png">
+[![GitHub release](https://img.shields.io/github/v/release/ApexRMS/epidemic.svg?style=for-the-badge&color=d68a06)](https://GitHub.com/ApexRMS/epidemic/releases/)
 #### [Github Repository](https://github.com/ApexRMS/epidemic)
 ## Model of epidemic infections and deaths
 ### *Epidemic* is an open-source [SyncroSim](https://syncrosim.com/) Base Package that provides a general framework for developing scenario-based stochastic models of future daily epidemic infections and deaths.
 
-<img align="right" style="padding: 12px" width="400" src="assets/images/epidemic-screen-cap.png">
+<img align="right" style="padding: 15px" width="400" src="assets/images/epidemic-screen-cap.png">
 
 The **Epidemic** package framework has been developed to produce real-time forecasts of COVID-19 infections and deaths that can be rapidly deployed for use anywhere in the world. Built upon the [SyncroSim](https://syncrosim.com/) software platform, **Epidemic** takes as input a time series of real-time reported case and death data along with different modeling approaches for forecasting and scenario analyses. **Epidemic** uses the latest source control techniques, allowing for continuous adaptions and improvements to be applied to the framework’s underlying models as understanding of COVID-19 evolves over time.
 
