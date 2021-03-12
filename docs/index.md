@@ -19,17 +19,17 @@ The **Epidemic** package framework has been developed to produce real-time forec
 
 The modeling framework behind **Epidemic** is general enough that it may be applied to any jurisdiction and any disease. As such, the framework allows decision makers to assess and compare alternative model projections for local accuracy and relevance, thus building confidence over time in their forecasts. Furthermore, the **Epidemic** framework provides policy makers with the flexibility to introduce their own local “what-if” scenarios regarding the effects of possible future changes to public health measures. The result is a tool that generates locally responsive, meaningful, and ultimately actionable forecasts.
 
-### Requirements
+## Requirements
 
 This package requires Syncrosim [version 2.2.27](https://syncrosim.com/download/).
 
-### How to install
+## How to install
 
 Open SyncroSim and select **File -> Packages… -> Install…**, then select the **epidemic** package and click OK.
 
 Alternatively, download [the latest release from Github](https://github.com/ApexRMS/epidemic/releases/). Open Syncrosim and navigate to packages, then install from file.
 
-### Developers
+## Developers
 
 Colin Daniel (Author, maintainer)
 <br>
