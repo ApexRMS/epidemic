@@ -30,3 +30,9 @@ This package requires Syncrosim [version 2.2.27](https://syncrosim.com/download/
 Open SyncroSim and select **File -> Packages… -> Install…**, then select the **epidemic** package and click OK.
 
 Alternatively, download [the latest release from Github](https://github.com/ApexRMS/epidemic/releases/). Open Syncrosim and navigate to packages, then install from file.
+
+### Developers
+
+Colin Daniel (Author, maintainer)
+Leonardo Frid (Author) <a href="https://https://orcid.org/0000-0002-5489-2337"><img align="left" style="padding: 0.5px" width="50" src="assets/images/ORCID.png">
+Alex Embrey (Author)
