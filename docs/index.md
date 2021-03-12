@@ -35,6 +35,6 @@ Alternatively, download [the latest release from Github](https://github.com/Apex
 
 Colin Daniel (Author, maintainer)
 <br>
-Leonardo Frid (Author) <a href="https://https://orcid.org/0000-0002-5489-2337"><img align="left" style="padding: 0.5px" width="20" src="assets/images/ORCID.png">
+Leonardo Frid (Author) <a href="https://https://orcid.org/0000-0002-5489-2337"><img align="right" style="padding: 0.5px" width="20" src="assets/images/ORCID.png"></a>
 <br>
 Alex Embrey (Author)
