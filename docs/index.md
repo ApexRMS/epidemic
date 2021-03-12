@@ -29,6 +29,14 @@ Open SyncroSim and select **File -> Packages… -> Install…**, then select the
 
 Alternatively, download [the latest release from Github](https://github.com/ApexRMS/epidemic/releases/). Open Syncrosim and navigate to packages, then install from file.
 
+## Links
+
+Browse source code at
+[http://github.com/ApexRMS/epidemic/](http://github.com/ApexRMS/epidemic/)
+<br>
+Report a bug at
+[http://github.com/ApexRMS/epidemic/issues](http://github.com/ApexRMS/epidemic/issues)
+
 ## Developers
 
 Colin Daniel (Author, maintainer)
